@@ -18,22 +18,29 @@ const App = () => {
     numbers.forEach(el => {
 
         el.addEventListener('click', (e) => {
-            if (((typeof +e.toElement.innerText) == 'number' && !isNaN(+e.toElement.innerText)) || (e.toElement.innerText == '.')) {
-                
+            if (((typeof +e.toElement.innerText) == 'number' && !isNaN(+e.toElement.innerText)) || ((e.toElement.innerText == '.')) && state.dot.length == 0) {
+
                 if (state.currOperator.length == 0) {
+
                     state.currFirstNum.push(e.toElement.innerText)
                     state.currFirstNum.join('')
+                    if (e.toElement.innerText == '.') {
+                        state.dot.push(e.toElement.innerText)
+                    }
 
                     let currNum = (state.currFirstNum.join(''))
                     console.log(currNum);
                     state.currResult = currNum
                     console.log(state.currFirstNum);
+                
 
                 } else {
 
                     state.currSecondNum.push(e.toElement.innerText)
                     state.currSecondNum.join('')
-
+                    if (e.toElement.innerText == '.') {
+                        state.dot.push(e.toElement.innerText)
+                    }
                     let currNum = (state.currSecondNum.join(''))
                     console.log(currNum);
                     state.currResult = currNum
@@ -47,6 +54,7 @@ const App = () => {
 
                 if (state.currOperator.length == 0) {
                     state.currOperator.push(e.toElement.innerText)
+                    state.dot = []
                 } else  {
                     state.currSecondOperator.splice(0, 1, e.toElement.innerText)
                     console.log(state.currSecondOperator);
@@ -58,7 +66,7 @@ const App = () => {
                         state.currResult = firstNum + secondNum
                         state.currSecondNum = []
                         state.currFirstNum = []
-                        state.dot = []
+
                         state.currFirstNum.push(state.currResult)
                         state.currOperator.splice(0, 1, state.currSecondOperator[0])
                         console.log(state.currFirstNum);
@@ -68,7 +76,7 @@ const App = () => {
                         state.currResult = firstNum - secondNum
                         state.currSecondNum = []
                         state.currFirstNum = []
-                        state.dot = []
+
                         state.currFirstNum.push(state.currResult)
                         state.currOperator.splice(0, 1, state.currSecondOperator[0])
 
@@ -76,7 +84,7 @@ const App = () => {
                         state.currResult = firstNum * secondNum
                         state.currSecondNum = []
                         state.currFirstNum = []
-                        state.dot = []
+
                         state.currFirstNum.push(state.currResult)
                         state.currOperator.splice(0, 1, state.currSecondOperator[0])
 
@@ -84,7 +92,7 @@ const App = () => {
                         state.currResult = firstNum / secondNum
                         state.currSecondNum = []
                         state.currFirstNum = []
-                        state.dot = []
+
                         state.currFirstNum.push(state.currResult)
                         state.currOperator.splice(0, 1, state.currSecondOperator[0])
                     } else if (state.currOperator == '=') {
