@@ -99,7 +99,7 @@ const App = () => {
                         state.currSecondNum = []
                         state.currFirstNum = []
                         state.currFirstNum.push(state.currResult)
-                        state.currOperator.splice(0, 1)
+                        state.currOperator.splice(0, 1, state.currSecondOperator[0])
                     }
 
                 }
